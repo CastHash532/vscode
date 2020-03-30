@@ -31,7 +31,7 @@ RUN yes | unminimize \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 ENV LANG=en_US.UTF-8
 
-echo "**** install code-server ****" && \
+RUN echo "**** install code-server ****" && \
  if [ -z ${CODE_RELEASE+x} ]; then \
 	CODE_RELEASE=$(curl -sX GET "https://api.github.com/repos/cdr/code-server/releases/latest" \
 	| awk '/tag_name/{print $4;exit}' FS='[""]'); \
@@ -189,6 +189,7 @@ RUN curl -fsSL https://sh.rustup.rs | sh -s -- -y \
 
 # ports and volumes
 EXPOSE 8443
+
 ### checks ###
 # no root-owned files in the home directory
 RUN notOwnedFile=$(find . -not "(" -user gitpod -and -group gitpod ")" -print -quit) \
