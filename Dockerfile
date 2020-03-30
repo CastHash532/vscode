@@ -1,14 +1,4 @@
-FROM buildpack-deps:bionic
-
-# set version label
-ARG BUILD_DATE
-ARG VERSION
-ARG CODE_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="aptalca"
-
-# environment settings
-ENV HOME="/config"
+FROM buildpack-deps:cosmic
 
 ### base ###
 RUN yes | unminimize \
@@ -21,7 +11,6 @@ RUN yes | unminimize \
         less \
         llvm \
         locales \
-        net-tools \
         man-db \
         nano \
         software-properties-common \
@@ -30,28 +19,6 @@ RUN yes | unminimize \
     && locale-gen en_US.UTF-8 \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 ENV LANG=en_US.UTF-8
-
-RUN echo "**** install code-server ****" && \
- if [ -z ${CODE_RELEASE+x} ]; then \
-	CODE_RELEASE=$(curl -sX GET "https://api.github.com/repos/cdr/code-server/releases/latest" \
-	| awk '/tag_name/{print $4;exit}' FS='[""]'); \
- fi && \
- CODE_URL=$(curl -sX GET "https://api.github.com/repos/cdr/code-server/releases/tags/${CODE_RELEASE}" \
-	| jq -r '.assets[] | select(.browser_download_url | contains("linux-x86_64")) | .browser_download_url') && \
- curl -o \
-	/tmp/code.tar.gz -L \
-	"${CODE_URL}" && \
- tar xzf /tmp/code.tar.gz -C \
-	/usr/bin/ --strip-components=1 \
-	--wildcards code-server*/code-server && \
- echo "**** clean up ****" && \
- rm -rf \
-	/tmp/* \
-	/var/lib/apt/lists/* \
-	/var/tmp/*
-
-# add local files
-COPY /root /
 
 ### Gitpod user ###
 # '-l': see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
@@ -187,11 +154,11 @@ RUN curl -fsSL https://sh.rustup.rs | sh -s -- -y \
     && .cargo/bin/rustup component add rls-preview rust-analysis rust-src \
     && .cargo/bin/rustup completions bash | sudo tee /etc/bash_completion.d/rustup.bash-completion > /dev/null
 
-# ports and volumes
-EXPOSE 8443
-
 ### checks ###
 # no root-owned files in the home directory
 RUN notOwnedFile=$(find . -not "(" -user gitpod -and -group gitpod ")" -print -quit) \
     && { [ -z "$notOwnedFile" ] \
         || { echo "Error: not all files/dirs in $HOME are owned by 'gitpod' user & group"; exit 1; } }
+
+FROM codercom/code-server
+USER Root
