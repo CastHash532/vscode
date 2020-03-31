@@ -5,7 +5,7 @@ USER root
  #installing docker in docker
  
 RUN echo "***installing docker***" && \
-sudo apt-get update  && sudo apt-get install \
+sudo apt-get update  && sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -14,7 +14,7 @@ sudo apt-get update  && sudo apt-get install \
     sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
-   stable" && sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io
+   stable" && sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io
    
 #installing docker-compose
 RUN echo "***installing docker-compose*** && \
