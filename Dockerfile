@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full
+FROM lsiobase/ubuntu:bionic
 
 #installing vscode
 ARG BUILD_DATE
