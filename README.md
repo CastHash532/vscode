@@ -6,7 +6,8 @@ Try it out:
 ```bash
 docker run --privileged \
             -p 127.0.0.1:8080:8080 \
-            -v "$PWD:/home/coder/project" \
+            -e PASSWORD=castiel `#optional` \
+            -v "$PWD:/home/gitpod/project" \
             -it casthash532/vscode
 ```
 
