@@ -14,7 +14,8 @@ sudo apt-get update  && sudo apt-get install -y \
     sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
-   stable" && sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+   stable" && sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io \
+   && service docker start
    
 #installing docker-compose
 RUN echo "***installing docker-compose***" && \
