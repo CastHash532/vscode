@@ -4,7 +4,10 @@
 Try it out:
 
 ```bash
-docker run --privileged -p 127.0.0.1:8080:8080 -v "$PWD:/home/coder/project" casthash532/vscode
+docker run --privileged \
+            -p 127.0.0.1:8080:8080 \
+            -v "$PWD:/home/coder/project" \
+            -it casthash532/vscode
 ```
 
 
