@@ -57,8 +57,6 @@ RUN echo "***installing docker-compose***" && \
 	-o /usr/local/bin/docker-compose \
 	&& sudo chmod +x /usr/local/bin/docker-compose
 	
-# add local files
-COPY /root /
 
 # ports and volumes
 EXPOSE 8443
