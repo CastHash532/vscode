@@ -29,5 +29,5 @@ RUN	cd /bin && \
 	sudo rm -r code-server-3.0.0-linux-x86_64.tar.gz && \
 	sudo mv code-server-3.0.0-linux-x86_64/ code-server/ && \
 	cd /home/gitpod && \
-	code-server --auth none
+	sudo code-server --auth none
  
