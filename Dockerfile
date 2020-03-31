@@ -27,7 +27,7 @@ RUN	cd /bin && \
 	sudo wget https://github.com/cdr/code-server/releases/download/3.0.0/code-server-3.0.0-linux-x86_64.tar.gz && \
 	sudo tar -xvzf code-server-3.0.0-linux-x86_64.tar.gz && \
 	sudo rm -r code-server-3.0.0-linux-x86_64.tar.gz && \
-	sudo mv code-server-3.0.0-linux-x86_64/ code-server/ && \
-	cd /home/gitpod && \
-	sudo code-server --auth none
+	sudo mv code-server-3.0.0-linux-x86_64/ code-server-3.0.0/ && \
+	cd code-server-3.0.0 && \
+	./code-server --auth none
  
