@@ -4,7 +4,7 @@ USER root
  
  #installing docker in docker
  
-RUN echo "***installing docker*** && \
+RUN echo "***installing docker***" && \
 sudo apt-get update  && sudo apt-get install \
     apt-transport-https \
     ca-certificates \
