@@ -1,4 +1,4 @@
-# VsCode by Casthash532
+# VsCode docker image by Casthash532
 
 `casthash532/vscode` is [VS Code](https://github.com/Microsoft/vscode) IDE running on a remote server.
 Try it out:
@@ -6,8 +6,8 @@ Try it out:
 ```bash
 docker run --privileged \
             -p 127.0.0.1:8080:8080 \
-            -e PASSWORD=castiel `#optional` \
-            -v "$PWD:/home/gitpod/project" \
+            -e PASSWORD=pass `#optional` \
+            -v "$PWD:/home/workspace/project" \
             -it casthash532/vscode
 ```
 
